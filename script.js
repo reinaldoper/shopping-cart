@@ -29,9 +29,8 @@ const receivedProduct = async () => {
   const obj = await fetchProducts('computador');
   const result = obj.results;
   result.map(({ id, title, thumbnail }) => section
-    .appendChild(createProductItemElement({ sku: id, name: title, image: thumbnail })));
+  .appendChild(createProductItemElement({ sku: id, name: title, image: thumbnail })));
 };
-receivedProduct();
 
 const getSkuFromProductItem = (item) => item.querySelector('span.item__sku').innerText;
 
