@@ -1,4 +1,5 @@
-const getSavedCartItems = () => {
+const getSavedCartItems = (items) => {
+  localStorage.getItem(items);
   // seu código aqui
 };
 
