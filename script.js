@@ -88,6 +88,10 @@ const myButon = () => {
 const receivedProduct = async () => {
   const section = document.querySelector('.items');
   const obj = await fetchProducts('computador');
+  if (obj === undefined) {
+    const a = document.querySelector('.loading');
+    a.innerHTML = 'carregando...';
+  }
   const result = obj.results;
   result.forEach(({ id, title, thumbnail }) => { 
     section
