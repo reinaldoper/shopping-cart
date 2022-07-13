@@ -23,10 +23,12 @@ const createProductItemElement = ({ sku, name, image }) => {
 
   return section;
 };
-
+document.querySelector('.empty-cart').addEventListener('click', () => {
+  const a = document.querySelector('ol');
+  a.innerText = '';
+});
 const salvaDados = () => {
   const l = document.querySelectorAll('li');
-  console.log(l);
   let all = '';
   console.log(all);
   if (l.length > 0) {
