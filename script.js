@@ -86,7 +86,12 @@ const myButon = () => {
   const botoes = document.querySelectorAll('.item__add');
     botoes.forEach((botao) => botao.addEventListener('click', adicionaCarrinho));
 };
-
+const carregaMsg = () => {
+  const a = document.querySelector('.loading');
+  setInterval(() => {
+    a.innerText = 'carregando...';
+  }, interval);
+};
 const receivedProduct = async () => {
   const section = document.querySelector('.items');
   const obj = await fetchProducts('computador');
@@ -114,12 +119,6 @@ const atualizaPage = () => {
       cart.appendChild(criaLi(item));
     });
   }
-};
-const carregaMsg = () => {
-  const a = document.querySelector('.loading');
-  setInterval(() => {
-    a.innerText = 'carregando...';
-  }, interval);
 };
 
 window.onload = async () => {
