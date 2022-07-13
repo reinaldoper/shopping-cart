@@ -1,3 +1,5 @@
+const interval = 125;
+
 const createProductImageElement = (imageSource) => {
   const img = document.createElement('img');
   img.className = 'item__image';
@@ -88,16 +90,12 @@ const myButon = () => {
 const receivedProduct = async () => {
   const section = document.querySelector('.items');
   const obj = await fetchProducts('computador');
-  console.log(obj);
-  if (obj === null) {
-    const a = document.querySelector('.loading');
-    a.innerHTML = 'carregando...';
-  }
   const result = obj.results;
   result.forEach(({ id, title, thumbnail }) => { 
     section
     .appendChild(createProductItemElement({ sku: id, name: title, image: thumbnail }));
   });
+  document.querySelector('.loading').style.display = 'none';
 };
 const criaLi = (item) => {
   const li = document.createElement('li');
@@ -117,10 +115,17 @@ const atualizaPage = () => {
     });
   }
 };
+const carregaMsg = () => {
+  const a = document.querySelector('.loading');
+  setInterval(() => {
+    a.innerText = 'carregando...';
+  }, interval);
+};
 
 window.onload = async () => {
   await receivedProduct();
   myButon();
   atualizaPage(); 
   somaPrice();
+  carregaMsg();
 };
