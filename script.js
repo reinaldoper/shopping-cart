@@ -88,7 +88,8 @@ const myButon = () => {
 const receivedProduct = async () => {
   const section = document.querySelector('.items');
   const obj = await fetchProducts('computador');
-  if (obj === undefined) {
+  console.log(obj);
+  if (obj === null) {
     const a = document.querySelector('.loading');
     a.innerHTML = 'carregando...';
   }
