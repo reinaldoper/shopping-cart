@@ -1,4 +1,4 @@
-const interval = 2000;
+const interval = 5;
 
 const createProductImageElement = (imageSource) => {
   const img = document.createElement('img');
