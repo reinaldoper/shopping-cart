@@ -37,12 +37,28 @@ const salvaDados = () => {
   saveCartItems(all);
 };
 
+const somaPrice = () => {
+  const result = document.querySelector('.total-price');
+  const somador = document.querySelectorAll('.cart__item');
+  const array = [];
+  somador.forEach((item) => {
+    const numeros = item.innerText.match(/[\d,.]+/g);
+    array.push(numeros[numeros.length - 1]);
+  });
+  const newArray = array.map(Number);
+  let soma = 0;
+  newArray.forEach((item) => {
+    soma += item;
+  });
+  result.innerHTML = soma;
+};
 const getSkuFromProductItem = (item) => item.querySelector('span.item__sku').innerText;
 
 const cartItemClickListener = ({ target }) => {
   const buton = document.querySelector('.cart__item');
   buton.addEventListener('click', target.remove());
   salvaDados();
+  somaPrice();
   // coloque seu código aqui
 };
 
@@ -60,6 +76,7 @@ const adicionaCarrinho = async (click) => {
   const { id, title, price } = await fetchItem(item);
   result.appendChild(createCartItemElement({ sku: id, name: title, salePrice: price }));
   salvaDados();
+  somaPrice();
 };
 const myButon = () => {
   const botoes = document.querySelectorAll('.item__add');
@@ -97,5 +114,6 @@ const atualizaPage = () => {
 window.onload = async () => {
   await receivedProduct();
   myButon();
-  atualizaPage();
+  atualizaPage(); 
+  somaPrice();
 };
