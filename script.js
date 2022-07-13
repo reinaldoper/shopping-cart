@@ -1,5 +1,3 @@
-const interval = 1000;
-
 const createProductImageElement = (imageSource) => {
   const img = document.createElement('img');
   img.className = 'item__image';
@@ -87,20 +85,27 @@ const myButon = () => {
     botoes.forEach((botao) => botao.addEventListener('click', adicionaCarrinho));
 };
 const carregaMsg = () => {
-  const a = document.querySelector('.loading');
-  setInterval(() => {
-    a.innerText = 'carregando...';
-  }, interval);
+  const p = document.createElement('h4');
+  const cart = document.querySelector('.cart');
+  p.className = 'loading';
+  p.innerHTML = 'carregando...';
+  cart.appendChild(p);
+};
+const apagaMsg = () => {
+  const p = document.querySelector('.cart');
+  const b = document.querySelector('.loading');
+  p.removeChild(b);
 };
 const receivedProduct = async () => {
   const section = document.querySelector('.items');
+  carregaMsg();
   const obj = await fetchProducts('computador');
+  apagaMsg();
   const result = obj.results;
   result.forEach(({ id, title, thumbnail }) => { 
     section
     .appendChild(createProductItemElement({ sku: id, name: title, image: thumbnail }));
   });
-  document.querySelector('.loading').style.display = 'none';
 };
 const criaLi = (item) => {
   const li = document.createElement('li');
@@ -126,5 +131,6 @@ window.onload = async () => {
   myButon();
   atualizaPage(); 
   somaPrice();
-  carregaMsg();
+  /* carregaMsg();
+  apagaMsg(); */
 };
